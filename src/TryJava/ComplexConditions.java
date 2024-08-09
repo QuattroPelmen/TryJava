@@ -11,11 +11,11 @@ public class ComplexConditions {
         this.inputArray = Arrays.copyOf(inputArray,inputArray.length);
         this.modifiedArray = new int[inputArray.length];
     }
-    public void applyComplexConditions(){
+    private void applyValueConditions(){
         int index;
 
         for (index = 0; index < inputArray.length; index++){
-            if(index%3 == 0){
+            if(index % 3 == 0){
                 modifiedArray[index] += 25;
             }
             if (inputArray[index] % 2 == 0 && inputArray[index] % 8 > 0){
@@ -24,7 +24,29 @@ public class ComplexConditions {
             if (inputArray[index] % 8 == 0){
                 modifiedArray[index] *= 2;
             }
+
         }
+    }
+    private void applySortingConditions(){
+        int index;
+        int temp;
+        for (index = 0; index < modifiedArray.length; index++){
+            //ascending sort
+            if (modifiedArray[index] < modifiedArray[index +1]){
+                temp = modifiedArray[index + 1];
+                modifiedArray[index + 1] = modifiedArray[index];
+                modifiedArray[index] = temp;
+            }
+            //advanced sort
+
+
+        }
+
+
+    }
+    public void applyComplexConditions(){
+        applyValueConditions();
+        applySortingConditions();
     }
     private void printArray(int input[]){
         for (int i = 0; i < input.length; i++){
@@ -46,8 +68,8 @@ public class ComplexConditions {
 //      Каждый третий элемент inputArray увеличивается на 25 - done
 //      Каждый элемент массива, который нацело делится на 2, но не делится на 8, умножается на 3. - done
 //      Те элементы, что нацело делятся на 8 должны быть удвоены. - done
-//Максимальный элемент массива нужно поменять местами с минимальным, при этом если один из них повторяется,
-// меняем местами те, которые имеют больший индекс.
+//      Максимальный элемент массива нужно поменять местами с минимальным - done
+// при этом если один из них повторяется, меняем местами те, которые имеют больший индекс.
 //Создай объект этого класса в Main и выведи оба массива один под другим.
 //ветку в гите назови complex-conditions
 //после пуша создай pull request
