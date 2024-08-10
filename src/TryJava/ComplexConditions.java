@@ -9,25 +9,25 @@ public class ComplexConditions {
     public ComplexConditions(int[] inputArray){
 
         this.inputArray = Arrays.copyOf(inputArray,inputArray.length);
-        this.modifiedArray = new int[inputArray.length];
+        this.modifiedArray = new int[inputArray.length]; // We can have all actions performed here.
     }
-    private void applyValueConditions(){
+    private void applyValueConditions(){  // this is not tested
         int index;
 
-        for (index = 0; index < inputArray.length; index++){
+        for (index = 0; index < inputArray.length; index++){ // for (int index = 0; ...
             if(index % 3 == 0){
-                modifiedArray[index] += 25;
+                modifiedArray[index] += 25; // when have you assigned a value to the array's member?
             }
             if (inputArray[index] % 2 == 0 && inputArray[index] % 8 > 0){
                 modifiedArray[index] *= 3;
-            }
+            }  //else if would be a little bit better, but not significantly
             if (inputArray[index] % 8 == 0){
                 modifiedArray[index] *= 2;
             }
 
         }
     }
-    private void applySortingConditions(){
+    private void applySortingConditions(){ //this is raw
         int index;
         int temp;
         for (index = 0; index < modifiedArray.length; index++){
@@ -44,17 +44,21 @@ public class ComplexConditions {
 
 
     }
-    public void applyComplexConditions(){
+    public void applyComplexConditions(){   // +
         applyValueConditions();
         applySortingConditions();
     }
-    private void printArray(int input[]){
+    private void printArray(int input[]){  // old conventions. (int[] input) - would be better
         for (int i = 0; i < input.length; i++){
             System.out.print(input[i] + " ");
         }
     }
-
-    public void printComplexConditions(){
+                                            /* empty lines between methods rule is up to project conventions, but we should choose the only way from the below:
+                                               1. No empty lines between methods at all.
+                                               2. Empty lines between different code regions (fields, constructors, public methods and private methods)
+                                               3. Every member of a class should be followed by an empty line, except the last one.
+                                             */
+    public void printComplexConditions(){  // ++
         System.out.println("Initial array" + "\n");
         printArray(inputArray);
         System.out.println("\n" + "Array after complex conditions being applied to it" + "\n");
