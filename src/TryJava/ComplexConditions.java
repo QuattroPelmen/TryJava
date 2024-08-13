@@ -2,111 +2,107 @@ package TryJava;
 import java.util.Arrays;
 public class ComplexConditions {
     private final int[] inputArray;
-    public int[] modifiedArray;
-    public ComplexConditions(int[] inputArray){
+    //Attention to the keyword "final" !
+    private final int[] modifiedArray;
+
+    public ComplexConditions(int[] inputArray, boolean minIndexConsidered){
         this.inputArray = Arrays.copyOf(inputArray,inputArray.length);
-        this.modifiedArray = Arrays.copyOf(inputArray, inputArray.length);
+        modifiedArray = Arrays.copyOf(inputArray, inputArray.length);
+
+        applyComplexConditions(minIndexConsidered);
     }
-    public void printComplexConditions(){
-        System.out.println("Initial array" + "\n");
+
+    public void printBothArrays(){
+        System.out.println("\n" + "Initial array:");
         printArray(inputArray);
-        System.out.println("\n" + "Array after complex conditions being applied to it" + "\n");
+        System.out.println("\n" + "Array after complex conditions being applied to it:");
         printArray(modifiedArray);
     }
-    public void applyComplexConditions(){   // +
+    public void applyComplexConditions(boolean minIndexConsidered){
         applyValueConditions();
-        applySortingConditions();
+
+        if (minIndexConsidered)
+            applySortingConditions();
+        else
+            applyAlternateSortingConditions();
     }
-    public void applyAlternateComplexConditions(){
-        applyValueConditions();
-        applyAlternateComplexConditions();
-    }
-    public void printArray(int[]input){  // old conventions. (int[] input) - would be better - done
-        for (int i = 0; i < input.length; i++){
-            System.out.print(input[i] + " ");
+
+    private void printArray(int[] input){
+        for (int j : input) {
+            System.out.print(j + " ");
         }
     }
-    private void applyValueConditions(){  // this is not tested
-        for (int index = 0; index < inputArray.length; index++){ // for (int index = 0; ... - done
+    private void applyValueConditions(){
+        for (int index = 0; index < inputArray.length; index++){
+            /* Apply the first condition */
             if((index + 1) % 3 == 0){
-                modifiedArray[index] += 25; // when have you assigned a value to the array's member? - done
+                modifiedArray[index] += 25;
             }
+
+            /* Apply the 2nd and the 3rd conditions */
             if ((inputArray[index] % 2) == 0 && (inputArray[index] % 8) != 0){
                 modifiedArray[index] *= 3;
-            }  //else if would be a little bit better, but not significantly - done
+            }
             else if ((inputArray[index] % 8) == 0){
                 modifiedArray[index] *= 2;
             }
         }
     }
-    private int findMinIndex(){
-        int minIndex = 0;
-        for (int index = 0; index < modifiedArray.length; index++){
-            if (modifiedArray[minIndex] >= modifiedArray[index]){
-                minIndex = index;
-            }
-        }
-        System.out.println("min: " + minIndex);
-        return minIndex;
-    }
-    private int findMaxIndex(){
-        int maxIndex = 0;
-        for (int index = 0; index < modifiedArray.length; index++){
-            if (modifiedArray[maxIndex] <= modifiedArray[index]){
-                maxIndex = index;
-            }
-        }
-        System.out.println("max: " + maxIndex);
-        return maxIndex;
-    }
-    private void swapMinMaxValues(int minIndex, int maxindex){
-        int temp;
-        if (maxindex != minIndex){
-            temp = modifiedArray[minIndex];
-            modifiedArray[minIndex] = modifiedArray[maxindex];
-            modifiedArray[maxindex] = temp;
-        }
-    }
     private void applySortingConditions(){
-        int minIndex, maxIndex;
-        minIndex = findMinIndex();
-        maxIndex = findMaxIndex();
-        swapMinMaxValues(minIndex,maxIndex);
-    }
-    private int findLowestMinIndex(){
-        int lowestMinIndex = 0;
-        for (int index = 0; index < modifiedArray.length; index++){
-            if (modifiedArray[lowestMinIndex] > modifiedArray[index]){
-                lowestMinIndex = index;
-                for (int innerIndex = 1; innerIndex < modifiedArray.length; innerIndex++){
-                    if (modifiedArray[lowestMinIndex] == modifiedArray[innerIndex]){
-                        break;
-                    }
-                }
-            }
-        }
-        System.out.println("lowestMin: " + lowestMinIndex);
-        return lowestMinIndex;
-    }
-    private int findLowestMaxIndex(){
-        int lowestMaxIndex = 0;
-        for (int index = 0; index < modifiedArray.length; index++){
-            if (modifiedArray[lowestMaxIndex] < modifiedArray[index]){
-                lowestMaxIndex = index;
-                for (int innerindex = 1; innerindex < modifiedArray.length; innerindex++){
-                    if (modifiedArray[lowestMaxIndex] == modifiedArray[innerindex]){
-                        break;
-                    }
-                }
-            }
-        }
-        System.out.println("Lowest max index: " + lowestMaxIndex);
-        return lowestMaxIndex;
+        swapElements(findLastMinElementIndex(), findLastMaxElementIndex());
     }
     private void applyAlternateSortingConditions(){
-    int minIndex, maxIndex;
-    minIndex = findLowestMinIndex();
-    maxIndex = findLowestMaxIndex();
-    swapMinMaxValues(minIndex,maxIndex);
+        swapElements(findFirstMinElementIndex(),findFirstMaxElementIndex());
+    }
+    /* The next two methods are implemented in another way. */
+    private int findLastMinElementIndex(){
+        int lastIndex = modifiedArray.length -1,
+            lastMinElementIndex = 0;
+        for (int index = lastIndex; index >= 0; index--){
+            if (modifiedArray[lastMinElementIndex] > modifiedArray[index]){
+                lastMinElementIndex = index;
+            }
+        }
+        System.out.println("LastMinElementIndex: " + lastMinElementIndex);
+        return lastMinElementIndex;
+    }
+    private int findLastMaxElementIndex(){
+        int lastIndex = modifiedArray.length -1,
+            lastMaxElementIndex = lastIndex;
+        for (int index = lastIndex; index >= 0; index--){
+            if (modifiedArray[lastMaxElementIndex] < modifiedArray[index]){
+                lastMaxElementIndex = index;
+            }
+        }
+        System.out.println("LastMaxElementIndex: " + lastMaxElementIndex);
+        return lastMaxElementIndex;
+    }
+    private void swapElements(int index1, int index2){
+        if (index2 != index1){
+            int temp;
+            temp = modifiedArray[index1];
+            modifiedArray[index1] = modifiedArray[index2];
+            modifiedArray[index2] = temp;
+        }
+    }
+    private int findFirstMinElementIndex(){
+        int firstMinElementIndex = 0;
+        for (int index = 0; index < modifiedArray.length; index++){
+            if (modifiedArray[firstMinElementIndex] > modifiedArray[index]){
+                firstMinElementIndex = index;
+            }
+        }
+        System.out.println("FirstMinElementIndex: " + firstMinElementIndex);
+        return firstMinElementIndex;
+    }
+    private int findFirstMaxElementIndex(){
+        int firstMaxElementIndex = 0;
+        for (int index = 0; index < modifiedArray.length; index++){
+            if (modifiedArray[firstMaxElementIndex] < modifiedArray[index]){
+                firstMaxElementIndex = index;
+            }
+        }
+        System.out.println("FirstMaxElementIndex: " + firstMaxElementIndex);
+        return firstMaxElementIndex;
     }
 }
