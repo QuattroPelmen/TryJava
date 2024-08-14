@@ -9,8 +9,8 @@ public class Main {
 //        ComplexConditions complexConditions = new ComplexConditions(new int[]{9,9,9,9,1,1,1,1});
 //        complexConditions.applyComplexConditions();
 //        complexConditions.printComplexConditions();
-        BubbleSort bubbleSort = new BubbleSort(new int[]{1,2,3,4,5});
-        System.out.println("1,2,3,4,5");
+        BubbleSort bubbleSort = new BubbleSort(new int[]{1,2,3,3,3,3,4,5});
+        System.out.println("1,2,3,3,3,3,4,5");
         bubbleSort.applyBubbleSortReverse();
         bubbleSort.printSortedArray();
     }
