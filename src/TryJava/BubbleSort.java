@@ -41,4 +41,7 @@ public class BubbleSort {
             }
         }
     }
+    public int[] getSortedArray(){
+        return inputArray;
+    }
 }
