@@ -20,7 +20,6 @@ public class TwoDimensionalArrayModificator {
         }
         return outputArray;
     }
-
     public static void main(String[] args) {
         int[][] array = { { 1, 2, 3 }, { 4, 5, 6 } };
         TwoDimensionalArrayModificator twoDimensionalArrayModificator = new TwoDimensionalArrayModificator(array);
