@@ -6,7 +6,7 @@ public class Factorial {
         for (int multiplier = 2; multiplier <= variableForFactorial; multiplier++){
             result *= multiplier;
         }
-        System.out.println("result is " + result);
+        System.out.println(variableForFactorial + "! = " + result);
         return result;
     }
     public static void main(String[] args) {
