@@ -5,7 +5,11 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) {
         int[] array = {3,6,8,10,12,14,99,100,111};
-        SideProblem.modifyArray(1,4,array);
+        //SideProblem.modifyArray(1,10,array);
+        SideProblem.modifyArrayAdvanced(1,10,array);
     }
 
 }
+
+// divide 3
+// divide 4
