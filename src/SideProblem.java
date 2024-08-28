@@ -47,9 +47,8 @@ public class SideProblem {
         }
 
         inputArrayList.stream().filter(x -> x > minValue)
-                        .filter(x -> x < maxValue)
-                        .filter(x -> x % 3 == 0)
-                        .filter(x -> x % 4 == 0)
+                        .filter(x -> x < maxValue & x > minValue)
+                        .filter(x -> x % 4 == 0 | x % 3 == 0)
                         .forEach(x -> modifiedArrayList.add(x));
 
         modifiedArray = new int[modifiedArrayList.size()];

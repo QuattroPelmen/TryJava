@@ -8,8 +8,6 @@ public class Main {
         //SideProblem.modifyArray(1,10,array);
         SideProblem.modifyArrayAdvanced(1,10,array);
     }
-
 }
-
 // divide 3
 // divide 4
