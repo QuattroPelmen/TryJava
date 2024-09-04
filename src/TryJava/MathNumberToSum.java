@@ -1,9 +1,8 @@
 package TryJava;
 
-import javax.xml.crypto.dsig.spec.XSLTTransformParameterSpec;
-
 public class MathNumberToSum {
     public static int numberToSum (int inputNumber){
+
         int sum = 0;
         sum += inputNumber % 10;
 
@@ -12,6 +11,11 @@ public class MathNumberToSum {
             sum += inputNumber % 10;
         }
          while (inputNumber >= 10);
+
+         if (sum >= 10){
+             sum = numberToSum(sum);
+         }
+
          return sum;
     }
 
@@ -23,11 +27,12 @@ public class MathNumberToSum {
         for (int index = 0; index < input.length(); index++){
             sum += Integer.parseInt(String.valueOf((input.charAt(index))));
         }
+
         return sum;
     }
 
     public static void main(String[] args) {
-        System.out.println(numberToSumAlternate(234));
-        System.out.println(numberToSum(234));
+        //System.out.println(numberToSumAlternate(234));
+        System.out.println(numberToSum(2345));
     }
 }
